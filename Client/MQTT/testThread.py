@@ -11,6 +11,7 @@ def print_time( threadName, delay):
       
       
       print ("%s: %s" % ( threadName, time.ctime(time.time()) ))
+      
 def print_time2( threadName, delay):
     
     while True:
