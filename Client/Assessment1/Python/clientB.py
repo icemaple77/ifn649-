@@ -3,7 +3,7 @@ import json
 import serial
 import time
 import string
-
+Alarm = serial.Serial("/dev/rfcomm2", 9600)
 Server="linux.chenyun.org"
 Port=1883
 topic="#"

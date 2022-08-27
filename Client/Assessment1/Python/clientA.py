@@ -50,7 +50,6 @@ def connect_mqtt():
             print("Connected to MQTT Broker!")
         else:
             print("Failed to connect, return code %d\n", rc)
-
     client = mqtt_client.Client(client_id)
     client.on_connect = on_connect
     client.connect(Server, port)
@@ -82,6 +81,23 @@ def publish(client):
         sendMsg(client,t2Topic,t2)
         sendMsg(client,h2Topic,h2)
         
+
+
+def run():
+    
+    client = connect_mqtt()
+    client.loop_start()
+
+    publish(client)
+
+if __name__ == '__main__':
+    run()
+
+
+
+
+
+
 # def publish_clt(client,room,t,h):
 #     Server="linux.chenyun.org"
 #     topic="QUTGP/sblock/level12/"
@@ -120,13 +136,3 @@ def publish(client):
 #         print(h2,t2)
 #         publish_clt("room1202",t2,h2)
 #     # Pub("123123","linux.chenyun.org",h1,h2,t1,t2)
-
-def run():
-    
-    client = connect_mqtt()
-    client.loop_start()
-
-    publish(client)
-
-if __name__ == '__main__':
-    run()
