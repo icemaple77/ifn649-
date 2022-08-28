@@ -3,7 +3,7 @@ import json
 import serial
 import time
 import string
-Alarm = serial.Serial("/dev/rfcomm2", 9600)
+ser = serial.Serial("/dev/rfcomm2", 9600)
 Server="linux.chenyun.org"
 Port=1883
 topic="#"
@@ -32,26 +32,26 @@ def controlAlarm(data):
     #print (mes_to_dict["title"])
     if(RawData["roomNO"]=="*ROOM1201*"):
         if (RawData["title"]=="Temperature"):
-            if(float(RawData["degree"])>23):
-                Call_Function(Alart)
-            else:
-                Call_Function(Close)
+            if(float(RawData["degree"])>25):
+                ser.write(bytes("1", 'utf-8'))
+           
+               
         if (RawData["title"]=="Humidity"):
-            if(float(RawData["degree"])<10):
-                Call_Function(Alert)
-            else:
-                Call_Function(Close)
+            if(float(RawData["degree"])>60) :
+                ser.write(bytes("2", 'utf-8'))
+           
+                
     if(RawData["roomNO"]=="*ROOM1202*"):
         if (RawData["title"]=="Temperature"):
-            if(float(RawData["degree"])>23):
-                Call_Function(Alart)
-            else:
-                Call_Function(Close)
+            if(float(RawData["degree"])>25):
+                ser.write(bytes("1", 'utf-8'))
+         
+              
         if (RawData["title"]=="Humidity"):
-            if(float(RawData["degree"])<10):
-                Call_Function(Alart)
-            else:
-                Call_Function(Close)
+            if(float(RawData["degree"])>60):
+               ser.write(bytes("2", 'utf-8'))
+          
+              
 client = mqtt.Client() 
 client.on_connect = on_connect 
 client.on_message = on_message 
